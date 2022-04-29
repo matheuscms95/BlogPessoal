@@ -31,9 +31,9 @@ namespace BlogPessoalTeste.Testes.data
             usuario.Senha = "587469321";
             usuario.Foto = "AquiVaiOLinkDaFoto";
 
-            _contexto.Usuarios.Add(usuario);
+            _contexto.Usuarios.Add(usuario) //Adicionando usuário
 
-            _contexto.SaveChanges();
+            _contexto.SaveChanges(); //Commita as alterações
 
             Assert.IsNotNull(_contexto.Usuarios.FirstOrDefault(u => u.Email == "matheus@email.com"));
         }
