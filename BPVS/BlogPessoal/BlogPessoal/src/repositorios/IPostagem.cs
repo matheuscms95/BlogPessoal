@@ -11,7 +11,7 @@ namespace BlogPessoal.src.repositorios
     /// <para> 29/04/2022</para>
     /// </summary>
     public interface IPostagem
-    {
+    {   
         void NovaPostagem(NovaPostagemDTO postagem);
         void AtualizarPostagem(AtualizarPostagemDTO postagem);
         void DeletarPostagem(int id);

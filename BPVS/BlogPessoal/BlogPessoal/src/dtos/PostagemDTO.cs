@@ -32,16 +32,19 @@ namespace BlogPessoal.src.dtos
             EmailCriador = emailCriador;
             DescricaoTema = descricaoTema;
         }
-    }    
-    
-         /// <summary>
-         /// <para>Resumo: Classe espelho para alterar uma postagem</para>
-         /// <para>Criado por: Matheus Correia</para>
-         /// <para>Versão: 1.0</para>
-         /// <para> 29/04/2022</para>
-         /// </summary>
+    }
+
+    /// <summary>
+    /// <para>Resumo: Classe espelho para alterar uma postagem</para>
+    /// <para>Criado por: Matheus Correia</para>
+    /// <para>Versão: 1.0</para>
+    /// <para> 29/04/2022</para>
+    /// </summary>
     public class AtualizarPostagemDTO
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required, StringLength(30)]
         public string Titulo { get; set; }
 
@@ -53,8 +56,9 @@ namespace BlogPessoal.src.dtos
         [Required]
         public string DescricaoTema { get; set; }
 
-        public AtualizarPostagemDTO(string titulo, string descricao, string foto,  string descricaoTema)
+        public AtualizarPostagemDTO(int id, string titulo, string descricao, string foto,  string descricaoTema)
         {
+            Id = id;
             Titulo = titulo;
             Descricao = descricao;
             Foto = foto;

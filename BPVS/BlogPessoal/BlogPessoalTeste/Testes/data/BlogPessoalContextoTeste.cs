@@ -31,7 +31,7 @@ namespace BlogPessoalTeste.Testes.data
             usuario.Senha = "587469321";
             usuario.Foto = "AquiVaiOLinkDaFoto";
 
-            _contexto.Usuarios.Add(usuario) //Adicionando usuário
+            _contexto.Usuarios.Add(usuario); //Adicionando usuário
 
             _contexto.SaveChanges(); //Commita as alterações
 
