@@ -2,9 +2,11 @@
 using BlogPessoal.src.dtos;
 using BlogPessoal.src.repositorios;
 using BlogPessoal.src.repositorios.implementacoes;
+using BlogPessoal.src.utilidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlogPessoalTeste.Testes.repositorios
 {
@@ -14,114 +16,146 @@ namespace BlogPessoalTeste.Testes.repositorios
         private BlogPessoalContexto _contexto;
         private IUsuario _repositorio;
 
-        [TestInitialize]
-        public void ConfiguracaoInicial()
+        [TestMethod]
+        public async Task CriarQuatroUsuariosNoBancoRetornaQuatroUsuarios()
         {
+            // Definindo o contexto
             var opt = new DbContextOptionsBuilder<BlogPessoalContexto>()
-                .UseInMemoryDatabase(databaseName: "db_blogpessoal")
+                .UseInMemoryDatabase("CriarQuatroUsuariosNoBancoRetornaQuatroUsuarios")
                 .Options;
 
             _contexto = new BlogPessoalContexto(opt);
-
             _repositorio = new UsuarioRepositorio(_contexto);
-        }
-        [TestMethod]
-        public void CriarQuatroUsuariosNoBancoRetornaQuatroUsuarios()
-        {
+
             //GIVEN - Dado que registro 4 usuarios no banco
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Gustavo Boaz",
                     "gustavo@email.com",
                     "134652",
-                    "URLFOTO"));
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
 
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Mallu Boaz",
                     "mallu@email.com",
                     "134652",
-                    "URLFOTO"));
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
 
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Catarina Boaz",
                     "catarina@email.com",
                     "134652",
-                    "URLFOTO"));
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
 
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Pamela Boaz",
                     "pamela@email.com",
                     "134652",
-                    "URLFOTO"));
-            
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
+
             //WHEN - Quando pesquiso lista total
             //THEN - Então recebo 4 usuarios
             Assert.AreEqual(4, _contexto.Usuarios.Count());
         }
+
         [TestMethod]
-        public void PegarUsuarioPeloEmailRetornaNaoNulo()
+        public async Task PegarUsuarioPeloEmailRetornaNaoNulo()
         {
+            // Definindo o contexto
+            var opt = new DbContextOptionsBuilder<BlogPessoalContexto>()
+            .UseInMemoryDatabase(databaseName: "db_blogpessoal2")
+            .Options;
+
+            _contexto = new BlogPessoalContexto(opt);
+            _repositorio = new UsuarioRepositorio(_contexto);
+
             //GIVEN - Dado que registro um usuario no banco
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Zenildo Boaz",
                     "zenildo@email.com",
                     "134652",
-                    "URLFOTO"));
-            
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
+
             //WHEN - Quando pesquiso pelo email deste usuario
-            var user = _repositorio.PegarUsuarioPeloEmail("zenildo@email.com");
-           
+            var usuario = await _repositorio.PegarUsuarioPeloEmailAsync("zenildo@email.com");
+
             //THEN - Então obtenho um usuario
-            Assert.IsNotNull(user);
+            Assert.IsNotNull(usuario);
         }
+
         [TestMethod]
-        public void PegarUsuarioPeloIdRetornaNaoNuloENomeDoUsuario()
+        public async Task PegarUsuarioPeloIdRetornaNaoNuloENomeDoUsuario()
         {
+            // Definindo o contexto
+            var opt = new DbContextOptionsBuilder<BlogPessoalContexto>()
+                .UseInMemoryDatabase(databaseName: "db_blogpessoal3")
+                .Options;
+
+            _contexto = new BlogPessoalContexto(opt);
+            _repositorio = new UsuarioRepositorio(_contexto);
+
             //GIVEN - Dado que registro um usuario no banco
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Neusa Boaz",
                     "neusa@email.com",
                     "134652",
-                    "URLFOTO"));
-            //WHEN - Quando pesquiso pelo id 6
-            var user = _repositorio.PegarUsuarioPeloId(6);
-            
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
+
+            //WHEN - Quando pesquiso pelo id 1
+            var usuario = await _repositorio.PegarUsuarioPeloIdAsync(1);
+
             //THEN - Então, deve me retornar um elemento não nulo
-            Assert.IsNotNull(user);
-            
+            Assert.IsNotNull(usuario);
+
             //THEN - Então, o elemento deve ser Neusa Boaz
-            Assert.AreEqual("Neusa Boaz", user.Nome);
+            Assert.AreEqual("Neusa Boaz", usuario.Nome);
         }
+
         [TestMethod]
-        public void AtualizarUsuarioRetornaUsuarioAtualizado()
+        public async Task AtualizarUsuarioRetornaUsuarioAtualizado()
         {
+            // Definindo o contexto
+            var opt = new DbContextOptionsBuilder<BlogPessoalContexto>()
+                .UseInMemoryDatabase(databaseName: "db_blogpessoal4")
+                .Options;
+
+            _contexto = new BlogPessoalContexto(opt);
+            _repositorio = new UsuarioRepositorio(_contexto);
+
             //GIVEN - Dado que registro um usuario no banco
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Estefânia Boaz",
                     "estefania@email.com",
                     "134652",
-                    "URLFOTO"));
-            
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
+
             //WHEN - Quando atualizamos o usuario
-            var antigo =
-            _repositorio.PegarUsuarioPeloEmail("estefania@email.com");
-            _repositorio.AtualizarUsuario(
+            await _repositorio.AtualizarUsuarioAsync(
                 new AtualizarUsuarioDTO(
-                    7,
-                    "Estefânia Moura",
+                    1,
+                    "EstefâniaMoura",
                     "123456",
                     "URLFOTONOVA"));
-            
+
             //THEN - Então, quando validamos pesquisa deve retornar nome Estefânia Moura
-            Assert.AreEqual("Estefânia Moura", _contexto.Usuarios.FirstOrDefault(u => u.Id == antigo.Id).Nome);
+            var antigo = await _repositorio.PegarUsuarioPeloEmailAsync("estefania@email.com");
             
-            //THEN - Então, quando validamos pesquisa deve retornar senha 123456
+            Assert.AreEqual("Estefânia Moura", _contexto.Usuarios.FirstOrDefault(u => u.Id == antigo.Id).Nome);
+
+            //THEN - Então, quando validamos a pesquisa deve retornar senha 123456
             Assert.AreEqual("123456", _contexto.Usuarios.FirstOrDefault(u => u.Id == antigo.Id).Senha);
         }
     }
