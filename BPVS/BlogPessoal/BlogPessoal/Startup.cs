@@ -46,9 +46,18 @@ namespace BlogPessoal
             else
             {
                 services.AddDbContext<BlogPessoalContexto>(
-                    opt => opt.UseSqlServer(Configuration["ConnectionStringsDv:DefaultConnection"]));
+                    opt => opt.UseSqlServer(Configuration["ConnectionStringsDev:DefaultConnection"]));
             }
-                  
+
+            // Contexto
+            IConfigurationRoot config = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+            services.AddDbContext<BlogPessoalContexto>(
+            opt => opt.
+            UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
             //Configuração Repositorios
             services.AddScoped<IUsuario, UsuarioRepositorio>();
             services.AddScoped<ITema, TemaRepositorio>();
@@ -132,33 +141,33 @@ namespace BlogPessoal
                 });
             }
 
-                // Ambiente de produção
-                contexto.Database.EnsureCreated();
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1");
-                c.RoutePrefix = String.Empty;
-            });
+           contexto.Database.EnsureCreated();
+           app.UseDeveloperExceptionPage();
+           app.UseSwagger();
+           app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1");
+                    c.RoutePrefix = String.Empty;
+           });
+            
 
             // Ambiente de produção
             // Rotas
             app.UseRouting();
 
-                app.UseCors(c => c
-                            .AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                );
+            app.UseCors(c => c
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
-                // Autenticação e Autorização
-                app.UseAuthentication();
-                app.UseAuthorization();
+            // Autenticação e Autorização
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-                app.UseEndpoints(endpoints =>
-                {
+            app.UseEndpoints(endpoints =>
+            {
                     endpoints.MapControllers();
-                });
-            }
+            });
         }
     }
+}
