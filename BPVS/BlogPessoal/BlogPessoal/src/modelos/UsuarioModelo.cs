@@ -15,7 +15,8 @@ namespace BlogPessoal.src.modelos
     [Table("tb_usuarios")]    
     public class UsuarioModelo
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         
         [Required, StringLength(50)]
@@ -32,7 +33,7 @@ namespace BlogPessoal.src.modelos
         [Required]
         public TipoUsuario Tipo { get; set; }
 
-        [JsonIgnore, InverseProperty("Criador")]
+        [JsonIgnore]
         public List<PostagemModelo> MinhasPostagens { get; set; }
     }
 }

@@ -73,8 +73,8 @@ namespace BlogPessoal.src.repositorios.implementacoes
         {
             await _contexto.Usuarios.AddAsync(new UsuarioModelo
             {
-                Email = usuario.Email,
                 Nome = usuario.Nome,
+                Email = usuario.Email,
                 Senha = usuario.Senha,
                 Foto = usuario.Foto,
                 Tipo = usuario.Tipo
