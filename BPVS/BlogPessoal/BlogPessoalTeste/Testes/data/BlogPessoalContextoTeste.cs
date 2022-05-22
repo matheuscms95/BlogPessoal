@@ -1,5 +1,6 @@
 using BlogPessoal.src.data;
 using BlogPessoal.src.modelos;
+using BlogPessoal.src.utilidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -26,16 +27,17 @@ namespace BlogPessoalTeste.Testes.data
         {
             UsuarioModelo usuario = new UsuarioModelo();
 
-            usuario.Nome = "Matheus Correia";
-            usuario.Email = "matheus@email.com";
+            usuario.Nome = "Beth Correia";
+            usuario.Email = "bethcorreia@domain.com";
             usuario.Senha = "587469321";
             usuario.Foto = "AquiVaiOLinkDaFoto";
+            usuario.Tipo = TipoUsuario.NORMAL;
 
             _contexto.Usuarios.Add(usuario); //Adicionando usuário
 
             _contexto.SaveChanges(); //Commita as alterações
 
-            Assert.IsNotNull(_contexto.Usuarios.FirstOrDefault(u => u.Email == "matheus@email.com"));
+            Assert.IsNotNull(_contexto.Usuarios.FirstOrDefault(u => u.Email == "bethcorreia@domain.com"));
         }
     }
 }

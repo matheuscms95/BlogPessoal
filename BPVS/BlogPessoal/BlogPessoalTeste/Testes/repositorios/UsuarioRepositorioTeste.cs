@@ -30,33 +30,33 @@ namespace BlogPessoalTeste.Testes.repositorios
             //GIVEN - Dado que registro 4 usuarios no banco
             await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
-                    "Gustavo Boaz",
-                    "gustavo@email.com",
-                    "134652",
+                    "Zeca Junior",
+                    "zecajunior@domain.com",
+                    "123456",
                     "URLFOTO",
                     TipoUsuario.NORMAL));
 
             await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
-                    "Mallu Boaz",
-                    "mallu@email.com",
-                    "134652",
+                    "Tamara Estevam",
+                    "tamaraestevam@domain.com",
+                    "789456",
                     "URLFOTO",
                     TipoUsuario.NORMAL));
 
             await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
-                    "Catarina Boaz",
-                    "catarina@email.com",
-                    "134652",
+                    "Gilmar Santos",
+                    "gilmarsantos@domain.com",
+                    "326598",
                     "URLFOTO",
                     TipoUsuario.NORMAL));
 
             await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
-                    "Pamela Boaz",
-                    "pamela@email.com",
-                    "134652",
+                    "Adelina Santos",
+                    "adelinasantos@domain.com",
+                    "124578",
                     "URLFOTO",
                     TipoUsuario.NORMAL));
 
@@ -79,14 +79,14 @@ namespace BlogPessoalTeste.Testes.repositorios
             //GIVEN - Dado que registro um usuario no banco
             await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
-                    "Zenildo Boaz",
-                    "zenildo@email.com",
-                    "134652",
+                    "Juliana Correia",
+                    "julianacorreia@domain.com",
+                    "456123",
                     "URLFOTO",
                     TipoUsuario.NORMAL));
 
             //WHEN - Quando pesquiso pelo email deste usuario
-            var usuario = await _repositorio.PegarUsuarioPeloEmailAsync("zenildo@email.com");
+            var usuario = await _repositorio.PegarUsuarioPeloEmailAsync("julianacorreia@domain.com");
 
             //THEN - Então obtenho um usuario
             Assert.IsNotNull(usuario);
@@ -106,9 +106,9 @@ namespace BlogPessoalTeste.Testes.repositorios
             //GIVEN - Dado que registro um usuario no banco
             await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
-                    "Neusa Boaz",
-                    "neusa@email.com",
-                    "134652",
+                    "Maria Fatima",
+                    "mariafatima@domain.com",
+                    "123456",
                     "URLFOTO",
                     TipoUsuario.NORMAL));
 
@@ -119,7 +119,7 @@ namespace BlogPessoalTeste.Testes.repositorios
             Assert.IsNotNull(usuario);
 
             //THEN - Então, o elemento deve ser Neusa Boaz
-            Assert.AreEqual("Neusa Boaz", usuario.Nome);
+            Assert.AreEqual("Maria Fatima", usuario.Nome);
         }
 
         [TestMethod]
@@ -136,9 +136,9 @@ namespace BlogPessoalTeste.Testes.repositorios
             //GIVEN - Dado que registro um usuario no banco
             await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
-                    "Estefânia Boaz",
-                    "estefania@email.com",
-                    "134652",
+                    "Angeles Martinez",
+                    "angelesmartinez@domail.com",
+                    "123456",
                     "URLFOTO",
                     TipoUsuario.NORMAL));
 
@@ -146,17 +146,17 @@ namespace BlogPessoalTeste.Testes.repositorios
             await _repositorio.AtualizarUsuarioAsync(
                 new AtualizarUsuarioDTO(
                     1,
-                    "EstefâniaMoura",
-                    "123456",
+                    "Angeles Martinez",
+                    "951487",
                     "URLFOTONOVA"));
 
-            //THEN - Então, quando validamos pesquisa deve retornar nome Estefânia Moura
-            var antigo = await _repositorio.PegarUsuarioPeloEmailAsync("estefania@email.com");
+            //THEN - Então, quando validamos pesquisa deve retornar nome Angeles Martinez
+            var antigo = await _repositorio.PegarUsuarioPeloEmailAsync("angelesmartinez@domail.com");
             
-            Assert.AreEqual("Estefânia Moura", _contexto.Usuarios.FirstOrDefault(u => u.Id == antigo.Id).Nome);
+            Assert.AreEqual("Angeles Martinez", _contexto.Usuarios.FirstOrDefault(u => u.Id == antigo.Id).Nome);
 
-            //THEN - Então, quando validamos a pesquisa deve retornar senha 123456
-            Assert.AreEqual("123456", _contexto.Usuarios.FirstOrDefault(u => u.Id == antigo.Id).Senha);
+            //THEN - Então, quando validamos a pesquisa deve retornar senha 951487
+            Assert.AreEqual("951487", _contexto.Usuarios.FirstOrDefault(u => u.Id == antigo.Id).Senha);
         }
     }
 }

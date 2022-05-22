@@ -33,12 +33,20 @@ namespace BlogPessoalTeste.Testes.repositorios
 
             // GIVEN - Dado que registro 2 usuarios
             await _repositorioU.NovoUsuarioAsync(
-                new NovoUsuarioDTO("Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO", TipoUsuario.NORMAL)
-            );
+                new NovoUsuarioDTO(
+                    "Zeca Junior",
+                    "zecajunior@domain.com",
+                    "123456",
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
 
             await _repositorioU.NovoUsuarioAsync(
-                new NovoUsuarioDTO("Catarina Boaz", "catarina@email.com", "134652", "URLDAFOTO", TipoUsuario.NORMAL)
-            );
+                new NovoUsuarioDTO(
+                    "Gilmar Santos",
+                    "gilmarsantos@domain.com",
+                    "326598",
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
 
             // AND - E que registro 2 temas
             await _repositorioT.NovoTemaAsync(new NovoTemaDTO("C#"));
@@ -50,7 +58,7 @@ namespace BlogPessoalTeste.Testes.repositorios
                     "C# é muito massa",
                     "É uma linguagem muito utilizada no mundo",
                     "URLDAFOTO",
-                    "gustavo@email.com",
+                    "zecajunior@domain.com",
                     "C#"
                 )
             );
@@ -59,7 +67,7 @@ namespace BlogPessoalTeste.Testes.repositorios
                     "C# pode ser usado com Testes",
                     "O teste unitário é importante para o desenvolvimento",
                     "URLDAFOTO",
-                    "catarina@email.com",
+                    "gilmarsantos@domain.com",
                     "C#"
                 )
             );
@@ -68,7 +76,7 @@ namespace BlogPessoalTeste.Testes.repositorios
                     "Java é muito massa",
                     "Java também é muito utilizada no mundo",
                     "URLDAFOTO",
-                    "gustavo@email.com",
+                    "zecajunior@domain.com",
                     "Java"
                 )
             );
@@ -95,8 +103,12 @@ namespace BlogPessoalTeste.Testes.repositorios
 
             // GIVEN - Dado que registro 1 usuarios
             await _repositorioU.NovoUsuarioAsync(
-                new NovoUsuarioDTO("Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO", TipoUsuario.NORMAL)
-            );
+                new NovoUsuarioDTO(
+                    "Zeca Junior",
+                    "zecajunior@domain.com",
+                    "123456",
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
 
             // AND - E que registro 1 tema
             await _repositorioT.NovoTemaAsync(new NovoTemaDTO("COBOL"));
@@ -108,7 +120,7 @@ namespace BlogPessoalTeste.Testes.repositorios
                     "COBOL é muito massa",
                     "É uma linguagem muito utilizada no mundo",
                     "URLDAFOTO",
-                    "gustavo@email.com",
+                    "zecajunior@domain.com",
                     "COBOL"
                 )
             );
@@ -148,12 +160,20 @@ namespace BlogPessoalTeste.Testes.repositorios
 
             // GIVEN - Dado que registro 2 usuarios
             await _repositorioU.NovoUsuarioAsync(
-                new NovoUsuarioDTO("Gustavo Boaz", "gustavo@email.com", "134652", "URLDAFOTO", TipoUsuario.NORMAL)
-            );
-
+                new NovoUsuarioDTO(
+                    "Zeca Junior",
+                    "zecajunior@domain.com",
+                    "123456",
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
+            
             await _repositorioU.NovoUsuarioAsync(
-                new NovoUsuarioDTO("Catarina Boaz", "catarina@email.com", "134652", "URLDAFOTO", TipoUsuario.NORMAL)
-            );
+                new NovoUsuarioDTO(
+                    "Gilmar Santos",
+                    "gilmarsantos@domain.com",
+                    "326598",
+                    "URLFOTO",
+                    TipoUsuario.NORMAL));
 
             // AND - E que registro 2 temas
             await _repositorioT.NovoTemaAsync(new NovoTemaDTO("C#"));
@@ -165,7 +185,7 @@ namespace BlogPessoalTeste.Testes.repositorios
                     "C# é muito massa",
                     "É uma linguagem muito utilizada no mundo",
                     "URLDAFOTO",
-                    "gustavo@email.com",
+                    "zecajunior@domain.com",
                     "C#"
                 )
             );
@@ -174,7 +194,7 @@ namespace BlogPessoalTeste.Testes.repositorios
                     "C# pode ser usado com Testes",
                     "O teste unitário é importante para o desenvolvimento",
                     "URLDAFOTO",
-                    "catarina@email.com",
+                    "gilmarsantos@domain.com",
                     "C#"
                 )
             );
@@ -183,14 +203,14 @@ namespace BlogPessoalTeste.Testes.repositorios
                     "Java é muito massa",
                     "Java também é muito utilizada no mundo",
                     "URLDAFOTO",
-                    "gustavo@email.com",
+                    "zecajunior@domain.com",
                     "Java"
                 )
             );
 
             var postagensTeste1 = await _repositorioP.PegarPostagensPorPesquisaAsync("massa", null, null);
             var postagensTeste2 = await _repositorioP.PegarPostagensPorPesquisaAsync(null, "C#", null);
-            var postagensTeste3 = await _repositorioP.PegarPostagensPorPesquisaAsync(null, null, "gustavo@email.com");
+            var postagensTeste3 = await _repositorioP.PegarPostagensPorPesquisaAsync(null, null, "zecajunior@domain.com");
 
             // WHEN - Quando eu busco as postagen
             // THEN - Eu tenho as postagens que correspondem aos criterios

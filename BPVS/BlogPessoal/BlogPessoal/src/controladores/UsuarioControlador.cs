@@ -93,7 +93,7 @@ namespace BlogPessoal.src.controladores
             
             return Ok(usuario);
         }
-        
+
         /// <summary>
         /// Criar novo Usuario
         /// </summary>
@@ -108,7 +108,7 @@ namespace BlogPessoal.src.controladores
         ///        "email": "matheuscorreia@domain.com",
         ///        "senha": "986532",
         ///        "foto": "URLFOTO",
-        ///        "tipo": "NORMAL"
+        ///        "tipo": "ADMINISTRADOR"
         ///     }
         ///
         /// </remarks>
