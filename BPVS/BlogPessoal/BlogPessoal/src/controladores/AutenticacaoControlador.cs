@@ -42,7 +42,7 @@ namespace BlogPessoal.src.controladores
         ///
         ///     POST /api/Autenticacao
         ///     {
-        ///        "email": "matheuscorreia@email.com",
+        ///        "email": "matheuscorreia@domain.com",
         ///        "senha": "986532"
         ///     }
         ///
